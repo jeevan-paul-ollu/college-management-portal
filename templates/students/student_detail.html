@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Student Details
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Student Details</h1>
+        <p>View student information</p>
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2>
+        {{ student.first_name }}
+        {{ student.last_name }}
+    </h2>
+
+    <hr>
+
+    <p>
+        <strong>Student ID:</strong>
+        {{ student.student_id }}
+    </p>
+
+    <p>
+        <strong>Email:</strong>
+        {{ student.email }}
+    </p>
+
+    <p>
+        <strong>Phone:</strong>
+        {{ student.phone }}
+    </p>
+
+    <p>
+        <strong>Date of Birth:</strong>
+        {{ student.date_of_birth }}
+    </p>
+
+    <p>
+        <strong>Gender:</strong>
+        {{ student.gender }}
+    </p>
+
+    <p>
+        <strong>Department:</strong>
+        {{ student.department }}
+    </p>
+
+    <p>
+        <strong>Course:</strong>
+        {{ student.course }}
+    </p>
+
+    <p>
+        <strong>Year:</strong>
+        {{ student.year }}
+    </p>
+
+    <p>
+        <strong>Address:</strong>
+        {{ student.address }}
+    </p>
+
+    <div class="form-buttons">
+
+        <a
+            href="{% url 'student_update' student.pk %}"
+            class="btn-primary">
+            Edit
+        </a>
+
+        <a
+            href="{% url 'student_delete' student.pk %}"
+            class="btn-danger">
+            Delete
+        </a>
+
+        <a
+            href="{% url 'student_list' %}"
+            class="btn-secondary">
+            Back
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
