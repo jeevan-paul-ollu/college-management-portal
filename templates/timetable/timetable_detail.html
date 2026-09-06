@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Timetable Details
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1>Timetable Details</h1>
+
+
+    <table>
+
+        <tr>
+            <th>Day</th>
+            <td>{{ timetable.day }}</td>
+        </tr>
+
+
+        <tr>
+            <th>Subject</th>
+            <td>
+                {{ timetable.subject.subject_code }}
+                -
+                {{ timetable.subject.subject_name }}
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Faculty</th>
+            <td>
+                {{ timetable.faculty.first_name }}
+                {{ timetable.faculty.last_name }}
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Start Time</th>
+            <td>
+                {{ timetable.start_time|time:"H:i" }}
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>End Time</th>
+            <td>
+                {{ timetable.end_time|time:"H:i" }}
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Room</th>
+            <td>
+                {{ timetable.room_number }}
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Department</th>
+            <td>
+                {{ timetable.department }}
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Semester</th>
+            <td>
+                {{ timetable.semester }}
+            </td>
+        </tr>
+
+    </table>
+
+
+    <div class="form-buttons">
+
+        <a
+            href="{% url 'timetable_update' timetable.pk %}"
+            class="btn-primary">
+
+            Edit
+
+        </a>
+
+
+        <a
+            href="{% url 'timetable_list' %}"
+            class="btn-secondary">
+
+            Back
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

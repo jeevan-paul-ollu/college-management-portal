@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Result Details
+{% endblock %}
+
+
+{% block content %}
+
+<div class="section-header">
+
+    <div>
+
+        <h1>
+            Result Details
+        </h1>
+
+        <p>
+            Student marks and result
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2>
+        {{ result.student.first_name }}
+        {{ result.student.last_name }}
+    </h2>
+
+    <p>
+        Student ID:
+        <strong>
+            {{ result.student.student_id }}
+        </strong>
+    </p>
+
+    <hr>
+
+
+    <h3>
+        Subject
+    </h3>
+
+    <p>
+        {{ result.subject.subject_code }}
+        -
+        {{ result.subject.subject_name }}
+    </p>
+
+
+    <table>
+
+        <tr>
+            <th>Internal Marks</th>
+            <td>{{ result.internal_marks }} / 20</td>
+        </tr>
+
+        <tr>
+            <th>Assignment Marks</th>
+            <td>{{ result.assignment_marks }} / 10</td>
+        </tr>
+
+        <tr>
+            <th>Mid Exam</th>
+            <td>{{ result.mid_marks }} / 20</td>
+        </tr>
+
+        <tr>
+            <th>Semester Exam</th>
+            <td>{{ result.semester_marks }} / 50</td>
+        </tr>
+
+        <tr>
+            <th>Total</th>
+            <td>
+                <strong>
+                    {{ result.total }} / 100
+                </strong>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Percentage</th>
+            <td>
+                {{ result.percentage }}%
+            </td>
+        </tr>
+
+        <tr>
+            <th>Grade</th>
+            <td>
+                <strong>
+                    {{ result.grade }}
+                </strong>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Result</th>
+            <td>
+
+                {% if result.result == 'Pass' %}
+
+                <span class="result-pass">
+                    Pass
+                </span>
+
+                {% else %}
+
+                <span class="result-fail">
+                    Fail
+                </span>
+
+                {% endif %}
+
+            </td>
+        </tr>
+
+    </table>
+
+
+    <div class="form-buttons">
+
+        <a
+            href="{% url 'result_update' result.pk %}"
+            class="btn-primary">
+            Edit
+        </a>
+
+        <a
+            href="{% url 'result_list' %}"
+            class="btn-secondary">
+            Back
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

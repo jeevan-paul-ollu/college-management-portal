@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Fee Details
+{% endblock %}
+
+
+{% block content %}
+
+<div class="card">
+
+    <h1>
+        Fee Details
+    </h1>
+
+
+    <h2>
+        {{ fee.student.first_name }}
+        {{ fee.student.last_name }}
+    </h2>
+
+
+    <p>
+        Student ID:
+        <strong>
+            {{ fee.student.student_id }}
+        </strong>
+    </p>
+
+
+    <table>
+
+        <tr>
+            <th>Academic Year</th>
+            <td>{{ fee.academic_year }}</td>
+        </tr>
+
+        <tr>
+            <th>Total Fees</th>
+            <td>₹{{ fee.total_fees }}</td>
+        </tr>
+
+        <tr>
+            <th>Paid Amount</th>
+            <td>₹{{ fee.paid_amount }}</td>
+        </tr>
+
+        <tr>
+            <th>Pending Amount</th>
+            <td>₹{{ fee.pending_amount }}</td>
+        </tr>
+
+        <tr>
+
+            <th>Status</th>
+
+            <td>
+
+                {% if fee.payment_status == 'Paid' %}
+
+                <span class="fee-paid">
+                    Paid
+                </span>
+
+                {% elif fee.payment_status == 'Partial' %}
+
+                <span class="fee-partial">
+                    Partial
+                </span>
+
+                {% else %}
+
+                <span class="fee-pending">
+                    Pending
+                </span>
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <th>Payment Date</th>
+
+            <td>
+
+                {% if fee.payment_date %}
+                    {{ fee.payment_date }}
+                {% else %}
+                    -
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <th>Remarks</th>
+
+            <td>
+
+                {% if fee.remarks %}
+                    {{ fee.remarks }}
+                {% else %}
+                    -
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <div class="form-buttons">
+
+        <a
+            href="{% url 'fee_update' fee.pk %}"
+            class="btn-primary">
+
+            Edit
+
+        </a>
+
+
+        <a
+            href="{% url 'fee_list' %}"
+            class="btn-secondary">
+
+            Back
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

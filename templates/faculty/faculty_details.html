@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Faculty Details
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>Faculty Details</h1>
+
+        <p>
+            View faculty information
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2>
+        {{ faculty.first_name }}
+        {{ faculty.last_name }}
+    </h2>
+
+    <hr>
+
+
+    <p>
+        <strong>Faculty ID:</strong>
+        {{ faculty.faculty_id }}
+    </p>
+
+
+    <p>
+        <strong>Email:</strong>
+        {{ faculty.email }}
+    </p>
+
+
+    <p>
+        <strong>Phone:</strong>
+        {{ faculty.phone }}
+    </p>
+
+
+    <p>
+        <strong>Gender:</strong>
+        {{ faculty.gender }}
+    </p>
+
+
+    <p>
+        <strong>Department:</strong>
+        {{ faculty.department }}
+    </p>
+
+
+    <p>
+        <strong>Designation:</strong>
+        {{ faculty.designation }}
+    </p>
+
+
+    <p>
+        <strong>Qualification:</strong>
+        {{ faculty.qualification }}
+    </p>
+
+
+    <p>
+        <strong>Joining Date:</strong>
+        {{ faculty.joining_date }}
+    </p>
+
+
+    <p>
+        <strong>Address:</strong>
+        {{ faculty.address }}
+    </p>
+
+
+    <div class="form-buttons">
+
+        <a
+            href="{% url 'faculty_update' faculty.pk %}"
+            class="btn-primary">
+
+            Edit
+
+        </a>
+
+
+        <a
+            href="{% url 'faculty_delete' faculty.pk %}"
+            class="btn-danger">
+
+            Delete
+
+        </a>
+
+
+        <a
+            href="{% url 'faculty_list' %}"
+            class="btn-secondary">
+
+            Back
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

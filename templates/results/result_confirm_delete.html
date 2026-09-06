@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Result
+{% endblock %}
+
+
+{% block content %}
+
+<div class="card">
+
+    <h1>
+        Delete Result
+    </h1>
+
+    <p>
+        Are you sure you want to delete the result for:
+    </p>
+
+    <h3>
+        {{ result.student.first_name }}
+        {{ result.student.last_name }}
+    </h3>
+
+    <p>
+        Subject:
+        {{ result.subject.subject_name }}
+    </p>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-buttons">
+
+            <button
+                type="submit"
+                class="btn-danger">
+                Yes, Delete
+            </button>
+
+            <a
+                href="{% url 'result_list' %}"
+                class="btn-secondary">
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

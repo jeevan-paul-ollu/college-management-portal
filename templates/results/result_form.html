@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if result %}
+Edit Result
+{% else %}
+Add Result
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="section-header">
+
+    <div>
+
+        <h1>
+            {% if result %}
+            Edit Result
+            {% else %}
+            Add Result
+            {% endif %}
+        </h1>
+
+        <p>
+            Enter marks for the student
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="card form-card">
+
+    {% if form.errors %}
+
+    <div class="error-message">
+
+        <strong>
+            Please correct the following errors:
+        </strong>
+
+        {{ form.errors }}
+
+    </div>
+
+    {% endif %}
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <div class="form-group">
+
+            <label>
+                Student
+            </label>
+
+            {{ form.student }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Subject
+            </label>
+
+            {{ form.subject }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Internal Marks
+            </label>
+
+            {{ form.internal_marks }}
+
+            <small>
+                Maximum: 20
+            </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Assignment Marks
+            </label>
+
+            {{ form.assignment_marks }}
+
+            <small>
+                Maximum: 10
+            </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Mid Exam Marks
+            </label>
+
+            {{ form.mid_marks }}
+
+            <small>
+                Maximum: 20
+            </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Semester Exam Marks
+            </label>
+
+            {{ form.semester_marks }}
+
+            <small>
+                Maximum: 50
+            </small>
+
+        </div>
+
+
+        <div class="form-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                {% if result %}
+                Update Result
+                {% else %}
+                Save Result
+                {% endif %}
+
+            </button>
+
+
+            <a
+                href="{% url 'result_list' %}"
+                class="btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

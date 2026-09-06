@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Timetable Form
+{% endblock %}
+
+{% block content %}
+
+<div class="card form-card">
+
+    <h1>
+
+        {% if timetable %}
+            Edit Timetable
+        {% else %}
+            Add Timetable
+        {% endif %}
+
+    </h1>
+
+
+    {% if form.errors %}
+
+    <div class="error-message">
+        {{ form.errors }}
+    </div>
+
+    {% endif %}
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <div class="form-group">
+
+            <label>Day</label>
+
+            {{ form.day }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Subject</label>
+
+            {{ form.subject }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Faculty</label>
+
+            {{ form.faculty }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Start Time</label>
+
+            {{ form.start_time }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>End Time</label>
+
+            {{ form.end_time }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Room Number</label>
+
+            {{ form.room_number }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Department</label>
+
+            {{ form.department }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Semester</label>
+
+            {{ form.semester }}
+
+        </div>
+
+
+        <div class="form-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                {% if timetable %}
+                    Update Timetable
+                {% else %}
+                    Save Timetable
+                {% endif %}
+
+            </button>
+
+
+            <a
+                href="{% url 'timetable_list' %}"
+                class="btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

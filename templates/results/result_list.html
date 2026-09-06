@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Marks & Results
+{% endblock %}
+
+{% block content %}
+
+<div class="section-header">
+
+    <div>
+        <h1>Marks & Results</h1>
+
+        <p>
+            Manage student marks and results
+        </p>
+    </div>
+
+    <a
+        href="{% url 'result_create' %}"
+        class="btn-primary">
+        + Add Result
+    </a>
+
+</div>
+
+
+<div class="card filter-card">
+
+    <form method="GET">
+
+        <div class="filter-grid">
+
+            <div>
+
+                <label>
+                    Search
+                </label>
+
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ search }}"
+                    placeholder="Student ID, name or subject">
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Grade
+                </label>
+
+                <select name="grade">
+
+                    <option value="">
+                        All Grades
+                    </option>
+
+                    <option value="A+"
+                        {% if selected_grade == 'A+' %}
+                        selected
+                        {% endif %}>
+                        A+
+                    </option>
+
+                    <option value="A"
+                        {% if selected_grade == 'A' %}
+                        selected
+                        {% endif %}>
+                        A
+                    </option>
+
+                    <option value="B"
+                        {% if selected_grade == 'B' %}
+                        selected
+                        {% endif %}>
+                        B
+                    </option>
+
+                    <option value="C"
+                        {% if selected_grade == 'C' %}
+                        selected
+                        {% endif %}>
+                        C
+                    </option>
+
+                    <option value="D"
+                        {% if selected_grade == 'D' %}
+                        selected
+                        {% endif %}>
+                        D
+                    </option>
+
+                    <option value="F"
+                        {% if selected_grade == 'F' %}
+                        selected
+                        {% endif %}>
+                        F
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Result
+                </label>
+
+                <select name="result">
+
+                    <option value="">
+                        All
+                    </option>
+
+                    <option value="Pass"
+                        {% if selected_result == 'Pass' %}
+                        selected
+                        {% endif %}>
+                        Pass
+                    </option>
+
+                    <option value="Fail"
+                        {% if selected_result == 'Fail' %}
+                        selected
+                        {% endif %}>
+                        Fail
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="filter-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary">
+                Search
+            </button>
+
+            <a
+                href="{% url 'result_list' %}"
+                class="btn-secondary">
+                Clear
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<div class="card">
+
+    {% if results %}
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Student</th>
+
+                    <th>Subject</th>
+
+                    <th>Internal</th>
+
+                    <th>Assignment</th>
+
+                    <th>Mid</th>
+
+                    <th>Semester</th>
+
+                    <th>Total</th>
+
+                    <th>Grade</th>
+
+                    <th>Result</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for result in results %}
+
+                <tr>
+
+                    <td>
+                        {{ result.student.student_id }}
+                        <br>
+                        {{ result.student.first_name }}
+                        {{ result.student.last_name }}
+                    </td>
+
+                    <td>
+                        {{ result.subject.subject_code }}
+                        <br>
+                        {{ result.subject.subject_name }}
+                    </td>
+
+                    <td>
+                        {{ result.internal_marks }}
+                    </td>
+
+                    <td>
+                        {{ result.assignment_marks }}
+                    </td>
+
+                    <td>
+                        {{ result.mid_marks }}
+                    </td>
+
+                    <td>
+                        {{ result.semester_marks }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ result.total }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ result.grade }}
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        {% if result.result == 'Pass' %}
+
+                        <span class="result-pass">
+                            Pass
+                        </span>
+
+                        {% else %}
+
+                        <span class="result-fail">
+                            Fail
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'result_detail' result.pk %}"
+                            class="action-view">
+                            View
+                        </a>
+
+                        <a
+                            href="{% url 'result_update' result.pk %}"
+                            class="action-edit">
+                            Edit
+                        </a>
+
+                        <a
+                            href="{% url 'result_delete' result.pk %}"
+                            class="action-delete">
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <p>
+        No results found.
+    </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

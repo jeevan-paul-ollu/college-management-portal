@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% if subject %}
+Edit Subject
+{% else %}
+Add Subject
+{% endif %}
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            {% if subject %}
+            Edit Subject
+            {% else %}
+            Add Subject
+            {% endif %}
+
+        </h1>
+
+        <p>
+            Enter subject information below
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="card form-card">
+
+    {% if form.errors %}
+
+    <div class="error-message">
+
+        Please correct the errors below.
+
+        {{ form.errors }}
+
+    </div>
+
+    {% endif %}
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+
+        <div class="form-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                {% if subject %}
+                Update Subject
+                {% else %}
+                Add Subject
+                {% endif %}
+
+            </button>
+
+
+            <a
+                href="{% url 'academics_home' %}"
+                class="btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

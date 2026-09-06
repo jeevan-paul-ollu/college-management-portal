@@ -1,0 +1,278 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Timetable
+{% endblock %}
+
+{% block content %}
+
+<div class="section-header">
+
+    <div>
+        <h1>Timetable</h1>
+        <p>Manage college class schedules</p>
+    </div>
+
+    <a
+        href="{% url 'timetable_create' %}"
+        class="btn-primary">
+
+        + Add Timetable
+
+    </a>
+
+</div>
+
+
+<div class="card filter-card">
+
+    <form method="GET">
+
+        <div class="filter-grid">
+
+            <div>
+
+                <label>Search</label>
+
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ search }}"
+                    placeholder="Subject, faculty or room">
+
+            </div>
+
+
+            <div>
+
+                <label>Day</label>
+
+                <select name="day">
+
+                    <option value="">
+                        All Days
+                    </option>
+
+                    <option value="Monday"
+                        {% if selected_day == 'Monday' %}
+                        selected
+                        {% endif %}>
+                        Monday
+                    </option>
+
+                    <option value="Tuesday"
+                        {% if selected_day == 'Tuesday' %}
+                        selected
+                        {% endif %}>
+                        Tuesday
+                    </option>
+
+                    <option value="Wednesday"
+                        {% if selected_day == 'Wednesday' %}
+                        selected
+                        {% endif %}>
+                        Wednesday
+                    </option>
+
+                    <option value="Thursday"
+                        {% if selected_day == 'Thursday' %}
+                        selected
+                        {% endif %}>
+                        Thursday
+                    </option>
+
+                    <option value="Friday"
+                        {% if selected_day == 'Friday' %}
+                        selected
+                        {% endif %}>
+                        Friday
+                    </option>
+
+                    <option value="Saturday"
+                        {% if selected_day == 'Saturday' %}
+                        selected
+                        {% endif %}>
+                        Saturday
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Department</label>
+
+                <input
+                    type="text"
+                    name="department"
+                    value="{{ department }}"
+                    placeholder="Example: CSE">
+
+            </div>
+
+        </div>
+
+
+        <div class="filter-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                Search
+
+            </button>
+
+
+            <a
+                href="{% url 'timetable_list' %}"
+                class="btn-secondary">
+
+                Clear
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<div class="card">
+
+    {% if timetable %}
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Subject</th>
+                    <th>Faculty</th>
+                    <th>Room</th>
+                    <th>Department</th>
+                    <th>Semester</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for entry in timetable %}
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            {{ entry.day }}
+                        </strong>
+                    </td>
+
+
+                    <td>
+
+                        {{ entry.start_time|time:"H:i" }}
+                        -
+                        {{ entry.end_time|time:"H:i" }}
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            {{ entry.subject.subject_code }}
+                        </strong>
+
+                        <br>
+
+                        {{ entry.subject.subject_name }}
+
+                    </td>
+
+
+                    <td>
+
+                        {{ entry.faculty.first_name }}
+                        {{ entry.faculty.last_name }}
+
+                    </td>
+
+
+                    <td>
+                        {{ entry.room_number }}
+                    </td>
+
+
+                    <td>
+                        {{ entry.department }}
+                    </td>
+
+
+                    <td>
+                        {{ entry.semester }}
+                    </td>
+
+
+                    <td>
+
+                        <a
+                            href="{% url 'timetable_detail' entry.pk %}"
+                            class="action-view">
+
+                            View
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'timetable_update' entry.pk %}"
+                            class="action-edit">
+
+                            Edit
+
+                        </a>
+
+
+                        <a
+                            href="{% url 'timetable_delete' entry.pk %}"
+                            class="action-delete">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <p>
+        No timetable entries found.
+    </p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

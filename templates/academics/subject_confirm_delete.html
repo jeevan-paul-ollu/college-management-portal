@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Subject
+{% endblock %}
+
+{% block content %}
+
+<div class="card form-card">
+
+    <h1>Delete Subject</h1>
+
+    <p>
+        Are you sure you want to delete
+        <strong>
+            {{ subject.subject_name }}
+        </strong>?
+    </p>
+
+    <br>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <button
+            type="submit"
+            class="btn-danger">
+
+            Yes, Delete
+
+        </button>
+
+        <a
+            href="{% url 'academics_home' %}"
+            class="btn-secondary">
+
+            Cancel
+
+        </a>
+
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Notice Details
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <h1>
+        {{ notice.title }}
+    </h1>
+
+
+    <p>
+
+        <strong>Category:</strong>
+
+        {{ notice.category }}
+
+    </p>
+
+
+    <p>
+
+        <strong>Date:</strong>
+
+        {{ notice.notice_date }}
+
+    </p>
+
+
+    <hr>
+
+
+    <div>
+
+        {{ notice.description|linebreaks }}
+
+    </div>
+
+
+    <hr>
+
+
+    <p>
+
+        <strong>Status:</strong>
+
+        {% if notice.is_active %}
+
+            <span class="notice-active">
+                Active
+            </span>
+
+        {% else %}
+
+            <span class="notice-inactive">
+                Inactive
+            </span>
+
+        {% endif %}
+
+    </p>
+
+
+    <div class="form-buttons">
+
+        <a
+            href="{% url 'notice_update' notice.pk %}"
+            class="btn-primary">
+
+            Edit
+
+        </a>
+
+
+        <a
+            href="{% url 'notice_list' %}"
+            class="btn-secondary">
+
+            Back
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

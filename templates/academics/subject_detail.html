@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Subject Details
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Subject Details</h1>
+        <p>View academic subject information</p>
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2>
+        {{ subject.subject_name }}
+    </h2>
+
+    <br>
+
+    <p>
+        <strong>Subject Code:</strong>
+        {{ subject.subject_code }}
+    </p>
+
+    <p>
+        <strong>Department:</strong>
+        {{ subject.department }}
+    </p>
+
+    <p>
+        <strong>Course:</strong>
+        {{ subject.course }}
+    </p>
+
+    <p>
+        <strong>Semester:</strong>
+        {{ subject.get_semester_display }}
+    </p>
+
+    <p>
+        <strong>Credits:</strong>
+        {{ subject.credits }}
+    </p>
+
+    <p>
+        <strong>Description:</strong>
+        {{ subject.description|default:"No description available." }}
+    </p>
+
+
+    <div class="form-buttons">
+
+        <a
+            href="{% url 'subject_update' subject.pk %}"
+            class="btn-primary">
+
+            Edit
+
+        </a>
+
+        <a
+            href="{% url 'subject_delete' subject.pk %}"
+            class="btn-danger">
+
+            Delete
+
+        </a>
+
+        <a
+            href="{% url 'academics_home' %}"
+            class="btn-secondary">
+
+            Back
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

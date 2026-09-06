@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% if attendance %}
+Edit Attendance
+{% else %}
+Mark Attendance
+{% endif %}
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            {% if attendance %}
+            Edit Attendance
+            {% else %}
+            Mark Attendance
+            {% endif %}
+
+        </h1>
+
+        <p>
+            Record student attendance
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="card form-card">
+
+    {% if form.errors %}
+
+    <div class="error-message">
+
+        Please correct the errors below.
+
+        {{ form.errors }}
+
+    </div>
+
+    {% endif %}
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+
+        <div class="form-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                {% if attendance %}
+                Update Attendance
+                {% else %}
+                Mark Attendance
+                {% endif %}
+
+            </button>
+
+
+            <a
+                href="{% url 'attendance_list' %}"
+                class="btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

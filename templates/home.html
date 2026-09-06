@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home - College Management Portal
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+<div class="hero-content">
+
+    <h1>College Management Portal</h1>
+
+    <p>
+        Manage students, faculty, academics, attendance,
+        results, fees and notices from one platform.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="/students/" class="btn">Students</a>
+        <a href="/faculty/" class="btn">Faculty</a>
+    </div>
+
+</div>
+
+</section>
+
+<section class="dashboard-cards">
+
+<div class="card">
+    <h2>👨‍🎓 Students</h2>
+    <p>Manage student information and profiles.</p>
+</div>
+
+<div class="card">
+    <h2>👨‍🏫 Faculty</h2>
+    <p>Manage faculty and teaching information.</p>
+</div>
+
+<div class="card">
+    <h2>📚 Academics</h2>
+    <p>Manage courses, attendance and results.</p>
+</div>
+
+<div class="card">
+    <h2>💰 Fees</h2>
+    <p>Track student fee payments.</p>
+</div>
+
+</section>
+
+{% endblock %}

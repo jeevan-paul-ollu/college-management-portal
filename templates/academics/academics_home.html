@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Academics
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+        <h1>Academics</h1>
+        <p>Manage college subjects and academic information</p>
+    </div>
+
+    <div>
+        <a
+            href="{% url 'subject_create' %}"
+            class="btn-primary">
+
+            + Add Subject
+
+        </a>
+    </div>
+
+</div>
+
+
+<div class="card filter-card">
+
+    <form method="GET">
+
+        <div class="filter-grid">
+
+            <div>
+
+                <label>Search</label>
+
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ search }}"
+                    placeholder="Subject code or name">
+
+            </div>
+
+
+            <div>
+
+                <label>Department</label>
+
+                <select name="department">
+
+                    <option value="">
+                        All Departments
+                    </option>
+
+                    {% for department in departments %}
+
+                    <option
+                        value="{{ department }}"
+                        {% if selected_department == department %}
+                        selected
+                        {% endif %}>
+
+                        {{ department }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Semester</label>
+
+                <select name="semester">
+
+                    <option value="">
+                        All Semesters
+                    </option>
+
+                    <option value="1">
+                        Semester 1
+                    </option>
+
+                    <option value="2">
+                        Semester 2
+                    </option>
+
+                    <option value="3">
+                        Semester 3
+                    </option>
+
+                    <option value="4">
+                        Semester 4
+                    </option>
+
+                    <option value="5">
+                        Semester 5
+                    </option>
+
+                    <option value="6">
+                        Semester 6
+                    </option>
+
+                    <option value="7">
+                        Semester 7
+                    </option>
+
+                    <option value="8">
+                        Semester 8
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="filter-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                🔍 Search
+
+            </button>
+
+            <a
+                href="{% url 'academics_home' %}"
+                class="btn-secondary">
+
+                Clear
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<div class="card">
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Code</th>
+                    <th>Subject</th>
+                    <th>Department</th>
+                    <th>Course</th>
+                    <th>Semester</th>
+                    <th>Credits</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for subject in subjects %}
+
+                <tr>
+
+                    <td>
+                        {{ subject.subject_code }}
+                    </td>
+
+                    <td>
+                        {{ subject.subject_name }}
+                    </td>
+
+                    <td>
+                        {{ subject.department }}
+                    </td>
+
+                    <td>
+                        {{ subject.course }}
+                    </td>
+
+                    <td>
+                        Semester {{ subject.semester }}
+                    </td>
+
+                    <td>
+                        {{ subject.credits }}
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'subject_detail' subject.pk %}"
+                            class="action-view">
+
+                            View
+
+                        </a>
+
+                        <a
+                            href="{% url 'subject_update' subject.pk %}"
+                            class="action-edit">
+
+                            Edit
+
+                        </a>
+
+                        <a
+                            href="{% url 'subject_delete' subject.pk %}"
+                            class="action-delete">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        class="empty-message">
+
+                        No subjects found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+{% if faculty %}
+Edit Faculty
+{% else %}
+Add Faculty
+{% endif %}
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+
+    <div>
+
+        <h1>
+
+            {% if faculty %}
+            Edit Faculty
+            {% else %}
+            Add Faculty
+            {% endif %}
+
+        </h1>
+
+        <p>
+            Enter faculty information below
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="card form-card">
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <div class="form-buttons">
+
+            <button
+                type="submit"
+                class="btn-primary">
+
+                {% if faculty %}
+                Update Faculty
+                {% else %}
+                Add Faculty
+                {% endif %}
+
+            </button>
+
+
+            <a
+                href="{% url 'faculty_list' %}"
+                class="btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

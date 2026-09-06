@@ -1,0 +1,1 @@
+console.log("College Management Portal loaded successfully.");
